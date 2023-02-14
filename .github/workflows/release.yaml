@@ -33,8 +33,6 @@ jobs:
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
-        with:
-          version: v0.9.1
 
       - name: Cache Docker layers
         uses: actions/cache@v3
@@ -77,6 +75,7 @@ jobs:
             --cache-to "type=local,dest=/tmp/.buildx-cache" \
             --output "type=image,push=true" \
             --platform="${PLATFORM}" \
+            --provenance=false \
             --target $TARGET \
             --tag $image_name .
 
@@ -85,6 +84,7 @@ jobs:
             --cache-to "type=local,dest=/tmp/.buildx-cache" \
             --output "type=image,push=true" \
             --platform="${PLATFORM}" \
+            --provenance=false \
             --target $TARGET \
             --tag quay.io/$image_name .
 
@@ -106,8 +106,6 @@ jobs:
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
-        with:
-          version: v0.9.1
 
       - name: Cache Docker layers
         uses: actions/cache@v3
@@ -149,6 +147,7 @@ jobs:
             --cache-from "type=local,src=/tmp/.buildx-cache" \
             --cache-to "type=local,dest=/tmp/.buildx-cache" \
             --output "type=image,push=true" \
+            --provenance=false \
             --platform="${PLATFORM}" \
             --target $TARGET \
             --tag $image_name .
@@ -157,6 +156,7 @@ jobs:
             --cache-from "type=local,src=/tmp/.buildx-cache" \
             --cache-to "type=local,dest=/tmp/.buildx-cache" \
             --output "type=image,push=true" \
+            --provenance=false \
             --platform="${PLATFORM}" \
             --target $TARGET \
             --tag quay.io/$image_name .
